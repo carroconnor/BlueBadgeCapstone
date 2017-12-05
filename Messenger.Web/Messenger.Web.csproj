@@ -196,7 +196,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -274,6 +273,20 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj">
+      <Project>{f0b9246b-4f47-4695-ae25-ea82e87c1bc2}</Project>
+      <Name>Messenger.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messenger.Models\Messenger.Models.csproj">
+      <Project>{a034c297-b7c1-46bd-b95b-74f2ac3a8f0a}</Project>
+      <Name>Messenger.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messenger.Services\Messenger.Services.csproj">
+      <Project>{fe1df2b4-abdd-47f4-a339-7aa6002d0a32}</Project>
+      <Name>Messenger.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
