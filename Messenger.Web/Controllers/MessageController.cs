@@ -12,6 +12,14 @@ namespace Messenger.Web.Controllers
     [Authorize]
     public class MessageController : Controller
     {
+        private MessageService CreateMessageService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MessageService(userId);
+
+            return service;
+        }
+        
         // GET: Message
         public ActionResult Index()
         {
@@ -53,6 +61,14 @@ namespace Messenger.Web.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new MessageService(userId);
             return service;
+        }
+
+        public ActionResult Details(int id)
+        {
+            var service = CreateMessageService();
+            var model = service.GetMessageById(id);
+
+            return View(model);
         }
 
 

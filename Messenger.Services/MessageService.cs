@@ -55,6 +55,26 @@ namespace Messenger.Services
                 return query.ToArray();
             }
         }
+
+        public MessageDetail GetMessageById(int messageId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Messages
+                        .Single(e => e.MessageId == messageId && e.OwnerId == _userId);
+                return
+                    new MessageDetail
+                    {
+                        MessageId = entity.MessageId,
+                        Title = entity.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
     }
 
    
