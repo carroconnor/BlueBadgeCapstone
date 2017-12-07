@@ -33,11 +33,24 @@ namespace Messenger.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MessageCreate model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                 
+                return View(model);
             }
-            return View(model);
+
+            var service = CreateMessageMethod();
+            service.CreateMessage(model);
+
+            return RedirectToAction("Index");
         }
+
+        private MessageService CreateMessageMethod()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MessageService(userId);
+            return service;
+        }
+
+
     }
 }
