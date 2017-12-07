@@ -33,15 +33,19 @@ namespace Messenger.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MessageCreate model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            if (!ModelState.IsValid) return View(model);
 
             var service = CreateMessageMethod();
-            service.CreateMessage(model);
 
-            return RedirectToAction("Index");
+            if (service.CreateMessage(model))
+            {
+                TempData["SaveResult"] = "Your note was created";
+                return RedirectToAction("Index");
+            } 
+
+            ModelState.AddModelError("", "Note could not be created");
+
+            return View(model);
         }
 
         private MessageService CreateMessageMethod()
