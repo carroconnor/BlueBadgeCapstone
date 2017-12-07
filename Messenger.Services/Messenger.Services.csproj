@@ -53,11 +53,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj">
+      <Project>{f0b9246b-4f47-4695-ae25-ea82e87c1bc2}</Project>
+      <Name>Messenger.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messenger.Models\Messenger.Models.csproj">
+      <Project>{a034c297-b7c1-46bd-b95b-74f2ac3a8f0a}</Project>
+      <Name>Messenger.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

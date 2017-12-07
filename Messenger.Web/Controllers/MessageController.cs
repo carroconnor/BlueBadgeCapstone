@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Messenger.Models;
+using Messenger.Services;
+using Microsoft.AspNet.Identity;
 
 namespace Messenger.Web.Controllers
 {
@@ -13,7 +15,10 @@ namespace Messenger.Web.Controllers
         // GET: Message
         public ActionResult Index()
         {
-            var model = new MessageListItem[0];
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MessageService(userId);
+            var model = service.GetNotes();
+
             return View(model);
         }
 
