@@ -56,6 +56,7 @@
     <Compile Include="MessageCreate.cs" />
     <Compile Include="MessageDetail.cs" />
     <Compile Include="MessageListItem.cs" />
+    <Compile Include="MessageEdit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

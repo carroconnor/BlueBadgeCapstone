@@ -75,6 +75,39 @@ namespace Messenger.Services
                     };
             }
         }
+
+        public bool UpdateMessage(MessageEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Messages
+                        .Single(e => e.MessageId == model.MessageId && e.OwnerId == _userId);
+
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                //this tells us how many rows are updated.
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteMessage(int messageId)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Messages
+                        .Single(e => e.MessageId == messageId && e.OwnerId == _userId);
+                //Mark for Deletion
+                ctx.Messages.Remove(entity);
+                //Only do one change
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 
    
