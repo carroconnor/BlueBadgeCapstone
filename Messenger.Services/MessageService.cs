@@ -34,7 +34,7 @@ namespace Messenger.Services
             }
         }
 
-        public IEnumerable<MessageListItem> GetNotes()
+        public IEnumerable<MessageListItem> GetMessages()
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -104,7 +104,7 @@ namespace Messenger.Services
                         .Single(e => e.MessageId == messageId && e.OwnerId == _userId);
                 //Mark for Deletion
                 ctx.Messages.Remove(entity);
-                //Only do one change
+                //Only do one change 
                 return ctx.SaveChanges() == 1;
             }
         }
