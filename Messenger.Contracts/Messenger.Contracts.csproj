@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FE1DF2B4-ABDD-47F4-A339-7AA6002D0A32}</ProjectGuid>
+    <ProjectGuid>{B7D3C160-3E85-4628-AB38-0F6BCF49CE76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Messenger.Services</RootNamespace>
-    <AssemblyName>Messenger.Services</AssemblyName>
+    <RootNamespace>Messenger.Contracts</RootNamespace>
+    <AssemblyName>Messenger.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,20 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,24 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageService.cs" />
+    <Compile Include="IMessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Messenger.Contracts\Messenger.Contracts.csproj">
-      <Project>{B7D3C160-3E85-4628-AB38-0F6BCF49CE76}</Project>
-      <Name>Messenger.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj">
-      <Project>{f0b9246b-4f47-4695-ae25-ea82e87c1bc2}</Project>
-      <Name>Messenger.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Messenger.Models\Messenger.Models.csproj">
-      <Project>{a034c297-b7c1-46bd-b95b-74f2ac3a8f0a}</Project>
+      <Project>{A034C297-B7C1-46BD-B95B-74F2AC3A8F0A}</Project>
       <Name>Messenger.Models</Name>
     </ProjectReference>
   </ItemGroup>

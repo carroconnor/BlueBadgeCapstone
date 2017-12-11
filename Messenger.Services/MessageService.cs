@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Messenger.Contracts;
 using Messenger.Data;
 using Messenger.Models;
 
 namespace Messenger.Services
 {
-    public class MessageService
+    public class MessageService : IMessageService 
     {
         private readonly Guid _userId;
 

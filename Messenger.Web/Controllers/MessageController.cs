@@ -13,6 +13,7 @@ namespace Messenger.Web.Controllers
 			[RequireHttps]
 #endif
 
+
     [Authorize]
 	public class MessageController : Controller
 	{
