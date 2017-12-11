@@ -95,6 +95,8 @@ namespace Messenger.Services
             }
         }
 
+        //Need Service That Saves Note To The Other Users Table
+
         public bool DeleteMessage(int messageId)
         {
             using(var ctx = new ApplicationDbContext())

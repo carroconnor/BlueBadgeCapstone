@@ -52,11 +52,11 @@ namespace Messenger.Web.Controllers
 
 			if (service.CreateMessage(model))
 			{
-				TempData["SaveResult"] = "Your note was created";
+				TempData["SaveResult"] = "Your Message Was Sent";
 				return RedirectToAction("Index");
 			} 
 
-			ModelState.AddModelError("", "Note could not be created");
+			ModelState.AddModelError("", "Message Could Not Be Created");
 
 			return View(model);
 		}
