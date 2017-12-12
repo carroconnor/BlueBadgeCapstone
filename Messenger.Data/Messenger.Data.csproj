@@ -55,11 +55,28 @@
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="Migrations\201712051822464_InitialCreate.cs" />
+    <Compile Include="Migrations\201712051822464_InitialCreate.Designer.cs">
+      <DependentUpon>201712051822464_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712121749240_AddRecieverId.cs" />
+    <Compile Include="Migrations\201712121749240_AddRecieverId.Designer.cs">
+      <DependentUpon>201712121749240_AddRecieverId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712051822464_InitialCreate.resx">
+      <DependentUpon>201712051822464_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121749240_AddRecieverId.resx">
+      <DependentUpon>201712121749240_AddRecieverId.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

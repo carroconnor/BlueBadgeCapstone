@@ -23,7 +23,7 @@ namespace Messenger.Services
             var entity =
                 new Message()
                 {
-                    OwnerId = _userId,
+                    RecieverId = model.RecieverId,
                     Title = model.Title,
                     Content = model.Content,
                     CreatedUtc = DateTimeOffset.Now
@@ -35,19 +35,20 @@ namespace Messenger.Services
             }
         }
 
-        public IEnumerable<MessageListItem> GetMessages()
+        public IEnumerable<MessageListItem> GetMessages(int recieverId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                         .Messages
-                        .Where(e => e.OwnerId == _userId)
+                        .Where(e => e.RecieverId == recieverId)
                         .Select(
                             e =>
                                 new MessageListItem
                                 {
                                     MessageId = e.MessageId,
+                                    RecieverId = e.RecieverId,
                                     Title = e.Title,
                                     Content = e.Content,
                                     CreatedUtc = e.CreatedUtc
@@ -69,6 +70,7 @@ namespace Messenger.Services
                     new MessageDetail
                     {
                         MessageId = entity.MessageId,
+                        RecieverId = entity.RecieverId,
                         Title = entity.Title,
                         Content = entity.Content,
                         CreatedUtc = entity.CreatedUtc,

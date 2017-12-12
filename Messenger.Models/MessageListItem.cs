@@ -10,6 +10,7 @@ namespace Messenger.Models
     public class MessageListItem
     {
         public int MessageId { get; set; }
+        public int RecieverId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
 

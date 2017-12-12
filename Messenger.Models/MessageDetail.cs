@@ -9,6 +9,7 @@ namespace Messenger.Models
     public class MessageDetail
     {
         public int MessageId { get; set; }
+        public int RecieverId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }

@@ -13,6 +13,7 @@ namespace Messenger.Models
         [Required]
         public string Title { get; set; }
         public string Content { get; set; }
+        public int RecieverId { get; set; }
 
         public override string ToString() => Title;
     }

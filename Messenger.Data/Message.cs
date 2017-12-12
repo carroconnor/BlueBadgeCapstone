@@ -16,6 +16,9 @@ namespace Messenger.Data
         public Guid OwnerId { get; set; }
 
         [Required]
+        public int RecieverId { get; set; }
+
+        [Required]
         public string Title { get; set; }
 
         [Required]
