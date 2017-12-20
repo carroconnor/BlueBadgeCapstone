@@ -42,6 +42,7 @@ namespace Messenger.Data
         }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Conversations> Conversations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,12 +57,12 @@ namespace Messenger.Data
         }
     }
 
-    
+
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
     {
         public IdentityUserLoginConfiguration()
-        { 
+        {
             HasKey(iul => iul.UserId);
         }
     }
