@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Messenger.Models;
 using Messenger.Services;
@@ -15,8 +12,8 @@ namespace Messenger.Web.Controllers
 
 
     [Authorize]
-	public class MessageController : Controller
-	{
+    public class MessageController : Controller
+    {
         public MessageService CreateMessageService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
@@ -24,122 +21,128 @@ namespace Messenger.Web.Controllers
 
             return service;
         }
-		
-		// GET: Message
-		public ActionResult Index()
-		{
-			var userId = Guid.Parse(User.Identity.GetUserId());
-			var service = new MessageService(userId);
-			var model = service.GetMessages();
 
-			return View(model);
-		}
+        // GET: Message
+        public ActionResult Index()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MessageService(userId);
+            var model = service.GetMessages();
 
-		//Create Method
+            return View(model);
+        }
 
-		public ActionResult Create()
-		{
-			return View();
-		}
+        public ActionResult Mine()
+        {
+            var model = new MyMessages();
+            return View(model);
+        }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Create(MessageCreate model)
-		{
-			if (!ModelState.IsValid) return View(model);
+        //Create Method
 
-			var service = CreateMessageMethod();
+        public ActionResult Create()
+        {
+            return View();
+        }
 
-			if (service.CreateMessage(model))
-			{
-				TempData["SaveResult"] = "Your Message Was Sent";
-				return RedirectToAction("Index");
-			} 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(MessageCreate model)
+        {
+            if (!ModelState.IsValid) return View(model);
 
-			ModelState.AddModelError("", "Message Could Not Be Created");
+            var service = CreateMessageMethod();
 
-			return View(model);
-		}
+            if (service.CreateMessage(model))
+            {
+                TempData["SaveResult"] = "Your Message Was Sent";
+                return RedirectToAction("Index");
+            }
 
-		private MessageService CreateMessageMethod()
-		{
-			var userId = Guid.Parse(User.Identity.GetUserId());
-			var service = new MessageService(userId);
-			return service;
-		}
+            ModelState.AddModelError("", "Message Could Not Be Created");
 
-		public ActionResult Details(int id)
-		{
-			var service = CreateMessageService();
-			var model = service.GetMessageById(id);
+            return View(model);
+        }
 
-			return View(model);
-		}
+        private MessageService CreateMessageMethod()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MessageService(userId);
+            return service;
+        }
 
-		public ActionResult Edit(int id)
-		{
-			var service = CreateMessageService();
-			var detail = service.GetMessageById(id);
-			var model =
-				new MessageEdit
-				{
-					MessageId = detail.MessageId,
-					Title = detail.Title,
-					Content = detail.Content
-				};
-			return View(model);
-		}
+        public ActionResult Details(int id)
+        {
+            var service = CreateMessageService();
+            var model = service.GetMessageById(id);
 
+            return View(model);
+        }
 
-		//make it so they can only update title
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, MessageEdit model)
-		{
-			if (!ModelState.IsValid) return View(model);
-
-			if(model.MessageId != id)
-			{
-				ModelState.AddModelError("", "ID Does Not Match");
-				return View(model);
-			}
-
-			var service = CreateMessageService();
-
-			if (service.UpdateMessage(model))
-			{
-				TempData["SaveResult"] = "Your Message Was Updated";
-				return RedirectToAction("Index");
-			}
-
-			ModelState.AddModelError("", "Your Message Could Not Be Updated");
-			return View(model);
-		}
-
-		[ActionName("Delete")]
-		public ActionResult Delete(int id)
-		{
-			var service = CreateMessageService();
-			var model = service.GetMessageById(id);
-
-			return View(model);
-		}
-
-		[HttpPost]
-		[ActionName("Delete")]
-		[ValidateAntiForgeryToken]
-		public ActionResult DeleteMessage(int id)
-		{
-			var service = CreateMessageService();
-			//TODO: Handle failure
-
-			service.DeleteMessage(id);
-
-			TempData["SaveResult"] = "Your Message Was Deleted";
-
-			return RedirectToAction("Index");
-		}
+        public ActionResult Edit(int id)
+        {
+            var service = CreateMessageService();
+            var detail = service.GetMessageById(id);
+            var model =
+                new MessageEdit
+                {
+                    MessageId = detail.MessageId,
+                    Title = detail.Title,
+                    Content = detail.Content
+                };
+            return View(model);
+        }
 
 
-	}
+        //make it so they can only update title
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, MessageEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.MessageId != id)
+            {
+                ModelState.AddModelError("", "ID Does Not Match");
+                return View(model);
+            }
+
+            var service = CreateMessageService();
+
+            if (service.UpdateMessage(model))
+            {
+                TempData["SaveResult"] = "Your Message Was Updated";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your Message Could Not Be Updated");
+            return View(model);
+        }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service = CreateMessageService();
+            var model = service.GetMessageById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMessage(int id)
+        {
+            var service = CreateMessageService();
+            //TODO: Handle failure
+
+            service.DeleteMessage(id);
+
+            TempData["SaveResult"] = "Your Message Was Deleted";
+
+            return RedirectToAction("Index");
+        }
+
+
+    }
 }

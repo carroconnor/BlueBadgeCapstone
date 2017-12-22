@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Messenger.Contracts;
 using Messenger.Data;
 using Messenger.Models;
 
 namespace Messenger.Services
 {
-    public class MessageService : IMessageService 
+    public class MessageService : IMessageService
     {
         private readonly Guid _userId;
 
@@ -35,27 +33,27 @@ namespace Messenger.Services
             }
         }
 
-        public IEnumerable<MyMessages> GetMyMessages()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query =
-                    ctx
-                        .Messages
-                        .Where(i => i.OwnerId = _userId)
-                        .Select(
-                            e =>
-                                new MessageListItem
-                                {
-                                    MessageId = e.MessageId,
-                                    Title = e.Title,
-                                    Content = e.Content,
-                                    CreatedUtc = e.CreatedUtc
-                                }
-                        );
-                return query.ToArray();
-            }
-        }
+        //public IEnumerable<MyMessages> GetMyMessages()
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var query =
+        //            ctx
+        //                .Messages
+        //                .Where(i => i.OwnerId == _userId)
+        //                .Select(
+        //                    e =>
+        //                        new MyMessages()
+        //                        {
+        //                            MessageId = e.MessageId,
+        //                            Title = e.Title,
+        //                            Content = e.Content,
+        //                            CreatedUtc = e.CreatedUtc
+        //                        }
+        //                );
+        //        return query.ToArray();
+        //    }
+        //}
 
         public IEnumerable<MessageListItem> GetMessages()
         {
@@ -101,7 +99,7 @@ namespace Messenger.Services
 
         public bool UpdateMessage(MessageEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
@@ -121,7 +119,7 @@ namespace Messenger.Services
 
         public bool DeleteMessage(int messageId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
@@ -135,5 +133,5 @@ namespace Messenger.Services
         }
     }
 
-   
+
 }
