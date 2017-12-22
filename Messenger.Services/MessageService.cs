@@ -42,7 +42,7 @@ namespace Messenger.Services
                 var query =
                     ctx
                         .Messages
-                        .Where(e => e.OwnerId == _userId)
+                        //.Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
                                 new MessageListItem
