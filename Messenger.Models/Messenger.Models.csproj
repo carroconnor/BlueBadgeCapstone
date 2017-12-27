@@ -57,6 +57,11 @@
     <Compile Include="MessageDetail.cs" />
     <Compile Include="MessageListItem.cs" />
     <Compile Include="MessageEdit.cs" />
+    <Compile Include="Migrations\201712272206290_AddedNameToModels.cs" />
+    <Compile Include="Migrations\201712272206290_AddedNameToModels.Designer.cs">
+      <DependentUpon>201712272206290_AddedNameToModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +74,11 @@
       <Project>{F0B9246B-4F47-4695-AE25-EA82E87C1BC2}</Project>
       <Name>Messenger.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712272206290_AddedNameToModels.resx">
+      <DependentUpon>201712272206290_AddedNameToModels.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

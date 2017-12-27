@@ -84,7 +84,7 @@ namespace Messenger.Services
                 var entity =
                     ctx
                         .Messages
-                        .Single(e => e.MessageId == messageId && e.OwnerId == _userId);
+                        .Single(e => e.MessageId == messageId);
                 return
                     new MessageDetail
                     {

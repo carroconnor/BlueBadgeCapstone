@@ -56,11 +56,35 @@
     <Compile Include="Conversations.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="Migrations\201712201607516_InitialCreate.cs" />
+    <Compile Include="Migrations\201712201607516_InitialCreate.Designer.cs">
+      <DependentUpon>201712201607516_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712272151279_AddedNameToDatabase.cs" />
+    <Compile Include="Migrations\201712272151279_AddedNameToDatabase.Designer.cs">
+      <DependentUpon>201712272151279_AddedNameToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712272158438_AddedNameToViewsAndModels.cs" />
+    <Compile Include="Migrations\201712272158438_AddedNameToViewsAndModels.Designer.cs">
+      <DependentUpon>201712272158438_AddedNameToViewsAndModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201712201607516_InitialCreate.resx">
+      <DependentUpon>201712201607516_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712272151279_AddedNameToDatabase.resx">
+      <DependentUpon>201712272151279_AddedNameToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712272158438_AddedNameToViewsAndModels.resx">
+      <DependentUpon>201712272158438_AddedNameToViewsAndModels.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
