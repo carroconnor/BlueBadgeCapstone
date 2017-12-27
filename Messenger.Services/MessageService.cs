@@ -33,27 +33,27 @@ namespace Messenger.Services
             }
         }
 
-        //public IEnumerable<MyMessages> GetMyMessages()
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var query =
-        //            ctx
-        //                .Messages
-        //                .Where(i => i.OwnerId == _userId)
-        //                .Select(
-        //                    e =>
-        //                        new MyMessages()
-        //                        {
-        //                            MessageId = e.MessageId,
-        //                            Title = e.Title,
-        //                            Content = e.Content,
-        //                            CreatedUtc = e.CreatedUtc
-        //                        }
-        //                );
-        //        return query.ToArray();
-        //    }
-        //}
+        public IEnumerable<MyMessages> GetMyMessages()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Messages
+                        .Where(i => i.OwnerId == _userId)
+                        .Select(
+                            e =>
+                                new MyMessages()
+                                {
+                                    MessageId = e.MessageId,
+                                    Title = e.Title,
+                                    Content = e.Content,
+                                    CreatedUtc = e.CreatedUtc
+                                }
+                        );
+                return query.ToArray();
+            }
+        }
 
         public IEnumerable<MessageListItem> GetMessages()
         {

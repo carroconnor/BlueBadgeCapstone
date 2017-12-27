@@ -64,5 +64,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj">
+      <Project>{F0B9246B-4F47-4695-AE25-EA82E87C1BC2}</Project>
+      <Name>Messenger.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

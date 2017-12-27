@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using Messenger.Data;
 
 namespace Messenger.Models
 {
@@ -12,9 +15,12 @@ namespace Messenger.Models
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        public override string ToString() => Title;
+       
+    }
+
+    public class MessengerDbContext : DbContext
+    {
+        public DbSet<Message> MyMessages { get; set; }
     }
 }

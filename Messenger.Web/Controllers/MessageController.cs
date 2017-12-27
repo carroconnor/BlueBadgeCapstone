@@ -32,12 +32,6 @@ namespace Messenger.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Mine()
-        {
-            var model = new MyMessages();
-            return View(model);
-        }
-
         //Create Method
 
         public ActionResult Create()

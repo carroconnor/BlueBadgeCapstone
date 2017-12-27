@@ -1,10 +1,10 @@
-﻿@model Messenger.Models.MyMessages
+﻿@model IEnumerable<Messenger.Models.MyMessages>
 
 @{
-    ViewBag.Title = "Mine";
+    ViewBag.Title = "Index";
 }
 
-<h2>Mine</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
