@@ -266,6 +266,10 @@
     <Content Include="Views\Message\Delete.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTimeOffset.cshtml" />
     <Content Include="Views\MyMessage\Index.cshtml" />
+    <Content Include="Views\MyMessage\Create.cshtml" />
+    <Content Include="Views\MyMessage\Details.cshtml" />
+    <Content Include="Views\MyMessage\Edit.cshtml" />
+    <Content Include="Views\MyMessage\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

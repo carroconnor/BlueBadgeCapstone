@@ -113,6 +113,7 @@ namespace Messenger.Web.Controllers
             return View(model);
         }
 
+        
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
@@ -128,11 +129,11 @@ namespace Messenger.Web.Controllers
         public ActionResult DeleteMessage(int id)
         {
             var service = CreateMessageService();
-            //TODO: Handle failure
 
             service.DeleteMessage(id);
 
             TempData["SaveResult"] = "Your Message Was Deleted";
+            ModelState.AddModelError("", "Your Message Could Not Be Updated");
 
             return RedirectToAction("Index");
         }
