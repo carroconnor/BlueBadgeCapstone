@@ -19,12 +19,8 @@ namespace UnitTestMessage.Controllers.MessageControllerTests
         [TestMethod]
         public void ShouldCallCreateOnce()
         {
-            Act();
-
-            //Act
             var result = Controller.Create(new MessageCreate());
 
-            //Assert
             Assert.AreEqual(1, Service.CreateMessageCallCount);
         }
     }
