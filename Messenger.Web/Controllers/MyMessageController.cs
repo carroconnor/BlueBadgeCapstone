@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Messenger.Contracts;
 using Messenger.Models;
 using Messenger.Services;
 using Microsoft.AspNet.Identity;
@@ -14,6 +15,21 @@ namespace Messenger.Web.Controllers
     [Authorize]
     public class MyMessageController : Controller
     {
+        private readonly Lazy<IMessageService> _messageService;
+
+        public MyMessageController()
+        {
+            _messageService = new Lazy<IMessageService>(() =>
+
+                new MessageService(Guid.Parse(User.Identity.GetUserId()))
+            );
+        }
+
+        public MyMessageController(Lazy<IMessageService> messageService)
+        {
+            _messageService = messageService;
+        }
+
         public MessageService CreateMessageService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
@@ -45,9 +61,7 @@ namespace Messenger.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateMessageMethod();
-
-            if (service.CreateMessage(model))
+            if (_messageService.Value.CreateMessage(model))
             {
                 TempData["SaveResult"] = "Your Message Was Sent";
                 return RedirectToAction("Index");
@@ -67,16 +81,14 @@ namespace Messenger.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            var service = CreateMessageService();
-            var model = service.GetMessageById(id);
+            var model = _messageService.Value.GetMessageById(id);
 
             return View(model);
         }
 
         public ActionResult Edit(int id)
         {
-            var service = CreateMessageService();
-            var detail = service.GetMessageById(id);
+            var detail = _messageService.Value.GetMessageById(id);
             var model =
                 new MessageEdit
                 {
@@ -101,9 +113,7 @@ namespace Messenger.Web.Controllers
                 return View(model);
             }
 
-            var service = CreateMessageService();
-
-            if (service.UpdateMessage(model))
+            if (_messageService.Value.UpdateMessage(model))
             {
                 TempData["SaveResult"] = "Your Message Was Updated";
                 return RedirectToAction("Index");
@@ -113,12 +123,11 @@ namespace Messenger.Web.Controllers
             return View(model);
         }
 
-        
+
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service = CreateMessageService();
-            var model = service.GetMessageById(id);
+            var model = _messageService.Value.GetMessageById(id);
 
             return View(model);
         }
@@ -128,9 +137,7 @@ namespace Messenger.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteMessage(int id)
         {
-            var service = CreateMessageService();
-
-            service.DeleteMessage(id);
+            _messageService.Value.DeleteMessage(id);
 
             TempData["SaveResult"] = "Your Message Was Deleted";
             ModelState.AddModelError("", "Your Message Could Not Be Updated");

@@ -62,9 +62,7 @@ namespace Messenger.Web.Controllers
 
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateMessageMethod();
-
-            if (service.CreateMessage(model))
+            if (_messageService.Value.CreateMessage(model))
             {
                 TempData["SaveResult"] = "Your Message Was Sent";
                 return RedirectToAction("Index");
@@ -73,15 +71,6 @@ namespace Messenger.Web.Controllers
             ModelState.AddModelError("", "Message Could Not Be Created");
 
             return View(model);
-        }
-
-        private MessageService CreateMessageMethod()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            //var name = User.Identity.Name;
-            var service = new MessageService(userId);
-
-            return service;
         }
 
         public ActionResult Details(int id)
