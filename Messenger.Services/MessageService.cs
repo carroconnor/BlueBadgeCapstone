@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Messenger.Contracts;
 using Messenger.Data;
@@ -72,7 +73,7 @@ namespace Messenger.Services
                                     Content = e.Content,
                                     CreatedUtc = e.CreatedUtc
                                 }
-                            );
+                        );
                 return query.ToArray();
             }
         }
@@ -110,12 +111,9 @@ namespace Messenger.Services
                 entity.Content = model.Content;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                //this tells us how many rows are updated.
                 return ctx.SaveChanges() == 1;
             }
         }
-
-        //Need Service That Saves Note To The Other Users Table
 
         public bool DeleteMessage(int messageId)
         {
@@ -125,9 +123,8 @@ namespace Messenger.Services
                     ctx
                         .Messages
                         .Single(e => e.MessageId == messageId && e.OwnerId == _userId);
-                //Mark for Deletion
                 ctx.Messages.Remove(entity);
-                //Only do one change 
+
                 return ctx.SaveChanges() == 1;
             }
         }

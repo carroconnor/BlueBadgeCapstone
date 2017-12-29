@@ -288,6 +288,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Messenger.Contracts\Messenger.Contracts.csproj">
+      <Project>{B7D3C160-3E85-4628-AB38-0F6BCF49CE76}</Project>
+      <Name>Messenger.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj">
       <Project>{f0b9246b-4f47-4695-ae25-ea82e87c1bc2}</Project>
       <Name>Messenger.Data</Name>

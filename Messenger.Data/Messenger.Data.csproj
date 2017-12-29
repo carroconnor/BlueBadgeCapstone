@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201712272158438_AddedNameToViewsAndModels.Designer.cs">
       <DependentUpon>201712272158438_AddedNameToViewsAndModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712282014180_AddedNameToMessageTable.cs" />
+    <Compile Include="Migrations\201712282014180_AddedNameToMessageTable.Designer.cs">
+      <DependentUpon>201712282014180_AddedNameToMessageTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712272158438_AddedNameToViewsAndModels.resx">
       <DependentUpon>201712272158438_AddedNameToViewsAndModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712282014180_AddedNameToMessageTable.resx">
+      <DependentUpon>201712282014180_AddedNameToMessageTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Messenger.Contracts;
 using Messenger.Models;
 using Messenger.Services;
 using Microsoft.AspNet.Identity;
@@ -14,6 +15,21 @@ namespace Messenger.Web.Controllers
     [Authorize]
     public class MessageController : Controller
     {
+        private readonly Lazy<IMessageService> _messageService;
+
+        public MessageController()
+        {
+            _messageService = new Lazy<IMessageService>(() =>
+
+                new MessageService(Guid.Parse(User.Identity.GetUserId()))
+            );
+        }
+
+        public MessageController(Lazy<IMessageService> messageService)
+        {
+            _messageService = messageService;
+        }
+
         public MessageService CreateMessageService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
@@ -43,6 +59,7 @@ namespace Messenger.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(MessageCreate model)
         {
+
             if (!ModelState.IsValid) return View(model);
 
             var service = CreateMessageMethod();
@@ -61,7 +78,9 @@ namespace Messenger.Web.Controllers
         private MessageService CreateMessageMethod()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
+            //var name = User.Identity.Name;
             var service = new MessageService(userId);
+
             return service;
         }
 
@@ -72,71 +91,5 @@ namespace Messenger.Web.Controllers
 
             return View(model);
         }
-
-        //public ActionResult Edit(int id)
-        //{
-        //    var service = CreateMessageService();
-        //    var detail = service.GetMessageById(id);
-        //    var model =
-        //        new MessageEdit
-        //        {
-        //            MessageId = detail.MessageId,
-        //            Title = detail.Title,
-        //            Content = detail.Content
-        //        };
-        //    return View(model);
-        //}
-
-
-        ////make it so they can only update title
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, MessageEdit model)
-        //{
-        //    if (!ModelState.IsValid) return View(model);
-
-        //    if (model.MessageId != id)
-        //    {
-        //        ModelState.AddModelError("", "ID Does Not Match");
-        //        return View(model);
-        //    }
-
-        //    var service = CreateMessageService();
-
-        //    if (service.UpdateMessage(model))
-        //    {
-        //        TempData["SaveResult"] = "Your Message Was Updated";
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ModelState.AddModelError("", "Your Message Could Not Be Updated");
-        //    return View(model);
-        //}
-
-        //[ActionName("Delete")]
-        //public ActionResult Delete(int id)
-        //{
-        //    var service = CreateMessageService();
-        //    var model = service.GetMessageById(id);
-
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //[ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteMessage(int id)
-        //{
-        //    var service = CreateMessageService();
-        //    //TODO: Handle failure
-
-        //    service.DeleteMessage(id);
-
-        //    TempData["SaveResult"] = "Your Message Was Deleted";
-
-        //    return RedirectToAction("Index");
-        //}
-
-
     }
 }

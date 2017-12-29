@@ -1,10 +1,11 @@
-﻿@model IEnumerable<Messenger.Models.MyMessages>
+﻿@using Messenger.Data
+@model IEnumerable<Messenger.Models.MyMessages>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>My Messages</h2>
 
 @if (TempData.ContainsKey("SaveResult"))
 {
