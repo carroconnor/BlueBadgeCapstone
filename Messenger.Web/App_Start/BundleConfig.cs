@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Messenger.Web
 {
@@ -24,7 +23,7 @@ namespace Messenger.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/slate.bootstrap.css",
                       "~/Content/site.css"));
         }
     }
