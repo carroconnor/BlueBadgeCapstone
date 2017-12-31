@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Messenger.Contracts;
 using Messenger.Data;
@@ -46,6 +45,7 @@ namespace Messenger.Services
                             e =>
                                 new MyMessages()
                                 {
+                                    Name = e.OwnerId.ToString(),
                                     MessageId = e.MessageId,
                                     Title = e.Title,
                                     Content = e.Content,
@@ -55,6 +55,19 @@ namespace Messenger.Services
                 return query.ToArray();
             }
         }
+
+        //public IEnumerable<MessageListItem> GetName()
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var query =
+        //            ctx
+        //                .Messages
+        //                .Where(e => e.OwnerId == _userId)
+        //                .Select(e => e.Name);
+        //        return query.SelectMany<ApplicationUser>(());
+        //    }
+        //}
 
         public IEnumerable<MessageListItem> GetMessages()
         {

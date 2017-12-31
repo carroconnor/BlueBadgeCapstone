@@ -13,7 +13,7 @@ namespace Messenger.Data
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        [StringLength (100)]
+        [StringLength(100)]
         public string Name { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
