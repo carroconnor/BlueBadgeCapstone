@@ -68,6 +68,7 @@ namespace Messenger.Services
                             e =>
                                 new MessageListItem
                                 {
+                                    Name = e.OwnerId.ToString(),
                                     MessageId = e.MessageId,
                                     Title = e.Title,
                                     Content = e.Content,
