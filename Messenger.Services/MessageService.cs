@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Security.Claims;
 using Messenger.Contracts;
 using Messenger.Data;
 using Messenger.Models;
@@ -36,59 +36,58 @@ namespace Messenger.Services
 
         public IEnumerable<MyMessages> GetMyMessages()
         {
+
             using (var ctx = new ApplicationDbContext())
             {
+                IDbSet<Message> messages = ctx.Messages;
+                IDbSet<ApplicationUser> users = ctx.Users;
+
                 var query =
-                    ctx
-                        .Messages
-                        .Where(i => i.OwnerId == _userId)
-                        .Select(
-                            e =>
+                    messages
+                        .Where(message => message.OwnerId == _userId)
+                        .Join(
+                            users,
+                            message => message.OwnerId.ToString(),
+                            user => user.Id.ToString(),
+                            (message, user) =>
                                 new MyMessages()
                                 {
-                                    Name = e.OwnerId.ToString(),
-                                    MessageId = e.MessageId,
-                                    Title = e.Title,
-                                    Content = e.Content,
-                                    CreatedUtc = e.CreatedUtc
+                                    Name = user.Name,
+                                    MessageId = message.MessageId,
+                                    Title = message.Title,
+                                    Content = message.Content,
+                                    CreatedUtc = message.CreatedUtc
                                 }
-                        );
+                          );
+
                 return query.ToArray();
             }
         }
-
-        //public IEnumerable<MessageListItem> GetName()
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var query =
-        //            ctx
-        //                .Messages
-        //                .Where(e => e.OwnerId == _userId)
-        //                .Select(e => e.Name);
-        //        return query.SelectMany<ApplicationUser>(());
-        //    }
-        //}
 
         public IEnumerable<MessageListItem> GetMessages()
         {
             using (var ctx = new ApplicationDbContext())
             {
+                IDbSet<Message> messages = ctx.Messages;
+                IDbSet<ApplicationUser> users = ctx.Users;
+
                 var query =
                     ctx
                         .Messages
-                        //.Where(e => e.OwnerId == _userId)
-                        .Select(
-                            e =>
-                                new MessageListItem
+                        .Join(
+                            users,
+                            message => message.OwnerId.ToString(),
+                            user => user.Id.ToString(),
+                            (message, user) =>
+                                new MessageListItem()
                                 {
-                                    Name = e.OwnerId.ToString(),
-                                    MessageId = e.MessageId,
-                                    Title = e.Title,
-                                    Content = e.Content,
-                                    CreatedUtc = e.CreatedUtc
-                                }
-                        );
+                                    Name = user.Name,
+                                    MessageId = message.MessageId,
+                                    Title = message.Title,
+                                    Content = message.Content,
+                                    CreatedUtc = message.CreatedUtc
+                                });
+
                 return query.ToArray();
             }
         }
